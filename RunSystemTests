@@ -1,0 +1,43 @@
+def runJob() {
+    String job = "${env.JOB_BASE_NAME}"
+    String id = "${currentBuild.number}"
+    String mavenCommand = "clean test -Dmaven.test.failure.ignore=true -Denvironment=prod -DfailIfNoTests=false -U -Dbuild.runname=HoTonPROD -Dbuild.runid=${BUILD_NUMBER}"
+//    node('qa && gui && win && comet') {
+     
+ //    node('hot') {
+     node('cometvbox') {
+        println("Starte Ablauf fuer " + job + "-" + id)
+        try {
+            stage('Checkout Source') {
+                println("Starte Checkout")
+                deleteDir()
+                checkout([$class: 'GitSCM', branches: [[name: 'origin/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GIT_https-vcs.balgroupit.com', url: 'https://bitbucket.balgroupit.com/scm/testautomatisierung/hot.git']]])
+                println("Checkout abgeschlossen")
+            }
+            stage('Run Tests') {
+                println("Starte Maven: " + mavenCommand)
+//                bat """
+//                set JAVA_HOME=C:\\Opt\\ITQ_Bundle_v0.3\\jdk1.8.0_162\\
+//                set M2_HOME=C:\\Opt\\ITQ_Bundle_v0.3\\maven-3.3.9\\
+//                C:\\Opt\\ITQ_Bundle_v0.3\\maven-3.3.9\\bin\\mvn.cmd """ + mavenCommand
+				  bat "mvn " + mavenCommand
+                println("Tests abgeschlossen")
+            }
+        } catch(all) {
+            println("Fehler aufgetreten: " + all)
+        } finally {
+            junit "**/target/surefire-reports/*.xml"
+            if (currentBuild.result != "SUCCESS" && currentBuild.result != null) {
+                mail bcc: '', body: 'Bitte ST-Resultate kontrollieren', cc: '', from: 'ccm3@baloise.ch', replyTo: '', subject: "STests failed: ${job}-${id}", to: 'christoph.dalcher@baloise.ch'
+            }
+//            archiveArtifacts allowEmptyArchive: true, artifacts: '**/testresults/**/*', fingerprint: true
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.png', fingerprint: true
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.jpg', fingerprint: true
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.html', fingerprint: true
+ //           archiveArtifacts allowEmptyArchive: true, artifacts: '**/testresults/**/*.txt', fingerprint: true
+ //           archiveArtifacts allowEmptyArchive: true, artifacts: '**/testresults/**/*.csv', fingerprint: true
+        }
+    }
+}
+
+runJob()
