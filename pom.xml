@@ -115,15 +115,14 @@
 			<version>3.16</version>
 		</dependency>
 		<dependency>
-			<groupId>com.baloise.reporting</groupId>
-			<artifactId>reporting</artifactId>
-			<version>0.2.7-SNAPSHOT</version>
-			<scope>compile</scope>
+			<groupId>com.baloise.testing.framework</groupId>
+			<artifactId>taf-browser</artifactId>
+			<version>0.0.9-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.baloise.testing.framework</groupId>
-			<artifactId>taf-browser</artifactId>
-			<version>0.0.8</version>
+			<artifactId>taf-browser-junit4-extensions</artifactId>
+			<version>0.0.9-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.microsoft.edge</groupId>
@@ -131,9 +130,10 @@
 			<version>3.141.0</version>
 		</dependency>
 		<dependency>
-			<groupId>ch.basler.codes</groupId>
-			<artifactId>PPISCodes</artifactId>
-			<version>1.1.1</version>
+		    <groupId>org.seleniumhq.selenium</groupId>
+		    <artifactId>selenium-java</artifactId>
+		    <version>4.8.3</version>
 		</dependency>
+
 	</dependencies>
 </project>

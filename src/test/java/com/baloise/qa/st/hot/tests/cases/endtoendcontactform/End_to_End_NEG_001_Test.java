@@ -3,10 +3,12 @@ package com.baloise.qa.st.hot.tests.cases.endtoendcontactform;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.baloise.qa.st.hot.base.finder.HOTBrFinder;
 import com.baloise.qa.st.hot.framework.applications.HoT;
 import com.baloise.qa.st.hot.framework.applications.IApplication.Application;
 import com.baloise.qa.st.hot.framework.browsers.GCBrowser;
 import com.baloise.qa.st.hot.framework.browsers.IBrowser.Browser;
+import com.baloise.qa.st.hot.framework.browsers.MEBrowser;
 import com.baloise.qa.st.hot.framework.environments.HOTProdEnv;
 import com.baloise.qa.st.hot.framework.environments.IEnvironment.Environment;
 import com.baloise.qa.st.hot.pages.confirmation.Confirmation;
@@ -41,9 +43,9 @@ public class End_to_End_NEG_001_Test extends AHOTTest {
 	@Test
 	@Environment(HOTProdEnv.class)
 	@Application(HoT.class)
-	@Browser(GCBrowser.class)
+	@Browser(MEBrowser.class)
 	public void execute() {
-
+	
 		setFill("neg_robot");
 		
 		//needed for executing tests out of a company network

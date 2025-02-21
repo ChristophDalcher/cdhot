@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MEBrowser extends ABrowser {
 
-  private static final String EDGEDRIVER = "msedgedriver_114.exe";
+  private static final String EDGEDRIVER = "msedgedriver_133.exe";
 
   @SuppressWarnings("removal")
 @Override

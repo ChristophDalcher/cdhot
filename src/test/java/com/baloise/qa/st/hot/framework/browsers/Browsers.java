@@ -8,14 +8,12 @@ public class Browsers {
   public static WebDriver GetBrowserDriver() {
     String browserName = System.getProperty("browser");
     if (browserName == null) {
-      return new FFBrowser().getDriver();
+      return new MEBrowser().getDriver();
     }
     browserName = browserName.toLowerCase().trim();
     switch (browserName) {
       case "ie":
         return new IEBrowser().getDriver();
-      case "ff":
-        return new FFBrowser().getDriver();
       case "gc":
         return new GCBrowser().getDriver();
       case "me":

@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import com.baloise.qa.st.hot.base.testcasemanager.ITestcaseManager;
 import com.baloise.qa.st.hot.base.testcasemanager.ITestcaseManager.TestcaseManager;
 import com.baloise.testautomation.taf.base._base.AnnotationHelper;
-import com.baloise.testing.reporting.jenkins.JenkinsTestResults;
 
 public class EISClassWatcher extends TestWatcher {
 
@@ -79,12 +78,6 @@ public class EISClassWatcher extends TestWatcher {
   }
 
   public boolean needsToRun(Description description) {
-    if (!System.getProperty(JenkinsTestResults.BUILD_RUNURL, "").isEmpty()) {
-      boolean needsToRun = !JenkinsTestResults.isMarkedAsPassed(description);
-      logger.info(
-          "Use previous result from Jenkins: " + description.getClassName() + " --> needs to run = " + needsToRun);
-      return needsToRun;
-    }
     String result = previousResults.get(description.getClassName());
     if (result == null) {
       return true;

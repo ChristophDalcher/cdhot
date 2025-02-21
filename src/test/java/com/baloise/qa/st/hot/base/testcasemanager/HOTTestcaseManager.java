@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 import com.baloise.qa.st.hot.base.finder.BaloiseBrFinder;
 import com.baloise.qa.st.hot.base.finder.HOTBrFinder;
 import com.baloise.qa.st.hot.framework.applications.IApplication;
-import com.baloise.qa.st.hot.framework.browsers.FFBrowser;
 import com.baloise.qa.st.hot.framework.browsers.IBrowser;
+import com.baloise.qa.st.hot.framework.browsers.MEBrowser;
 import com.baloise.qa.st.hot.framework.environments.IHOTEnvironment;
 import com.baloise.qa.st.hot.framework.environments.IEnvironment;
 import com.baloise.qa.st.hot.framework.locales.DELocale;
@@ -102,7 +102,7 @@ public class HOTTestcaseManager implements ITestcaseManager {
       initDebug();
     }
     if (browser == null) {
-      browser = new FFBrowser();
+      browser = new MEBrowser();
     }
 
     if (environment == null) {
